@@ -71,3 +71,12 @@ DELETE FROM people WHERE id = 2;
 
 -- DELETING ALL RECORDS FROM A TABLE
 TRUNCATE people;
+
+-- THIS COMMAND WILL CREATE A BACKUP OF YOUR DATABASE
+mysqldump -u root -p autoclub > backupautoclub;
+
+-- this command will restore a database from a backup dump file
+mysql -u root -p autoclub < backupautoclub.sql;
+
+-- this command should add a new column to a table
+ALTER TABLE people ADD COLUMN gender VARCHAR(5);
