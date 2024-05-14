@@ -55,11 +55,16 @@ SELECT UNIX_TIMESTAMP(CURRENT_TIMESTAMP()), FROM_UNIXTIME(1715680363);
 
 SELECT title, rating, replacement_cost from film;
 
--- aggregation function to pick out sum of replacements based on the rating
+-- aggregation function to pick out sum of replacement_cost column based on the rating
 SELECT rating, SUM(replacement_cost) from film GROUP BY rating;
--- aggregation function to pick out maximum of replacements based on the rating
+-- aggregation function to pick out maximum of replacement_cost based on the rating
 SELECT rating, MAX(replacement_cost) from film GROUP BY rating;
--- aggregation function to pick out number of occurrences in replacements column based on the rating
+-- aggregation function to pick out number of occurrences in replacement_cost column based on the rating
 SELECT rating, COUNT(replacement_cost) from film GROUP BY rating;
--- aggregation function to calculate the average of the replacements column based on the rating
+-- aggregation function to calculate the average of the replacement_cost column based on the rating
 SELECT rating, AVG(replacement_cost) from film GROUP BY rating;
+-- aggregation function to join all values from the replacement_cost column based on the rating
+SELECT rating, GROUP_CONCAT(replacement_cost) from film GROUP BY rating;
+
+--aggregation function to filter all values based on a certain condition replacement_cost column based on the rating
+SELECT rating, SUM(replacement_cost) from film GROUP BY rating HAVING SUM(replacement_cost) > 4000;
