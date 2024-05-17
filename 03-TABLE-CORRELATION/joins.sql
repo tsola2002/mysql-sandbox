@@ -28,3 +28,10 @@ SELECT Name FROM city WHERE CountryCode=(
     SELECT Code FROM country WHERE Name='Romania'
 );
 
+-- this code uses a subquery which depends on the main query(dependent subquery)
+SELECT
+    Name,
+    CountryCode,
+    (SELECT Name FROM country WHERE Code=city.CountryCode) AS CountryName
+FROM city;
+
