@@ -68,3 +68,12 @@ SELECT rating, GROUP_CONCAT(replacement_cost) from film GROUP BY rating;
 
 --aggregation function to filter all values based on a certain condition replacement_cost column based on the rating
 SELECT rating, SUM(replacement_cost) from film GROUP BY rating HAVING SUM(replacement_cost) > 4000;
+
+-- this statement will sort the table by the region in alphabetical order
+SELECT name, region FROM country ORDER BY region ASC;
+
+-- this statement will sort the table by the region in DESCENDING order
+SELECT name, region FROM country ORDER BY region DESC;
+
+-- this statement will display unique value rows
+SELECT DISTINCT region FROM country;
