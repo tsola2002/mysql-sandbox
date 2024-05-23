@@ -19,5 +19,9 @@ ORDER BY table_name;
 CREATE OR REPLACE VIEW customerlogdates AS
 SELECT first_name, last_name FROM customer;
 
+-- this will delete a specified view
+DROP VIEW customerlogdates;
 
+-- this will delete more than one view
+DROP VIEW customerdata, actor_info;
 
