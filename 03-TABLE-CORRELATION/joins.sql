@@ -35,3 +35,23 @@ SELECT
     (SELECT Name FROM country WHERE Code=city.CountryCode) AS CountryName
 FROM city;
 
+EXPLAIN SELECT * FROM city WHERE ID=2460;
+
+EXPLAIN SELECT ci.Name, co.Code AS CountryCode, co.Name
+AS CountryName
+FROM city ci LEFT JOIN country co ON ci.CountryCode=co.Code;
+
+-- this will explain the code and format the output vertically
+EXPLAIN SELECT * FROM country co LEFT JOIN city ci
+ON ci.CountryCode=co.Code WHERE ci.ID=540\G;
+
+-- this will explain the code and format the output both vertically and in JSON format
+EXPLAIN FORMAT=JSON SELECT * FROM country co
+LEFT JOIN city ci ON ci.CountryCode=co.Code WHERE ci.ID=540\G
+
+-- this will explain the code and format the output both vertically and in TREE format
+EXPLAIN FORMAT=TREE SELECT Name, CountryCode,
+(SELECT Name FROM country WHERE Code=city.CountryCode) AS CountryName
+FROM city\G
+
+EXPLAIN FORMAT=TREE SELECT * FROM country\G
