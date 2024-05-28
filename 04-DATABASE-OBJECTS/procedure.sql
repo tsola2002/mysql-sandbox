@@ -31,3 +31,6 @@ EXECUTE statement;
 DEALLOCATE PREPARE statement;
 END$$
 DELIMITER;
+
+-- this will run a stored procedure
+CALL sp_ListTableData("make");
