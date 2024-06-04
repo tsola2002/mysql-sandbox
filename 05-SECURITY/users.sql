@@ -33,15 +33,15 @@ SHOW GRANTS FOR johndoe
 
 
 SHOW GRANTS;
-
+-- this will remove a user permission
 REVOKE SELECT ON city FROM 'johndoe'@'%';
 
+-- this will switch to mysql database and list all users in mysql
 USE mysql
-
 SELECT user, host, password FROM user;
 
 CREATE USER joe;
--- this shows use users that have priviledges attached to them
+-- this shows all users that have privileges attached to them
 SELECT GRANTEE FROM information_schema.USER_PRIVILEGES GROUP BY GRANTEE;
 
 SELECT GRANTEE FROM information_schema.COLUMN_PRIVILEGES GROUP BY GRANTEE;
@@ -68,12 +68,38 @@ GRANT ALL ON employees.* TO 'patrick'@'%';
 GRANT ALL ON ebike.* TO 'patrick'@'%';
 GRANT ALL ON ebike.* TO 'mike'@'%';
 GRANT SELECT, INSERT, UPDATE, DELETE ON ebike.* TO 'webserver'@'%';
-e
+
 -- this will lock a mysql account
 ALTER USER 'janedoe'@'%' ACCOUNT LOCK;
 
 -- this will unlock an sql account
 ALTER USER 'janedoe'@'%' ACCOUNT UNLOCK;
 
+
+
+CREATE DATABASE mobileapp;
+
+CREATE USER 'sarah'@'%' IDENTIFIED BY 'sarah';
+GRANT ALL ON ebike.* TO 'sarah'@'%';
+GRANT ALL ON mobileapp.* TO 'sarah'@'%';
+GRANT ALL ON mobileapp.* TO 'mike'@'%';
+GRANT ALL ON mobileapp.* TO 'patrick'@'%';
+GRANT ALL ON mobileapp.* TO 'webserver'@'%';
+
+REVOKE ALL ON ebike.* FROM 'mike'@'%';
+ALTER USER 'patrick'@'%' IDENTIFIED BY 'patrick2';
+
+SHOW GRANTS FOR 'webserver'@'%';
+
 -- this will create a role
 CREATE ROLE `webdeveloper`;
+
+GRANT SELECT ON mysql.user TO 'webdeveloper';
+
+-- this will assign johndoe to the web developer role
+GRANT 'webdeveloper' TO 'johndoe'@'%';
+-- this will set your current logged in user to the role
+SET ROLE 'webdeveloper';
+
+-- this will display the cuurent role and current user
+SELECT CURRENT_ROLE(), CURRENT_USER();
