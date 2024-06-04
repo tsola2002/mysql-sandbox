@@ -74,3 +74,6 @@ ALTER USER 'janedoe'@'%' ACCOUNT LOCK;
 
 -- this will unlock an sql account
 ALTER USER 'janedoe'@'%' ACCOUNT UNLOCK;
+
+-- this will create a role
+CREATE ROLE `webdeveloper`;
